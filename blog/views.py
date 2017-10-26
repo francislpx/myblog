@@ -1,10 +1,13 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+
+from .models import Post
 
 
 def index(request):
-    # return HttpResponse('欢迎访问我的Blog')
-    return render(request, 'blog/index.html', context={
-        'title': '首页',
-        'welcome': '欢迎访问我的博客'
-    })
+    posts = Post.objects.all().order_by('-create_time')
+    return render(request, 'blog/index.html', context={'posts': posts})
+
+
+def detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/detail.html', context={'post': post})

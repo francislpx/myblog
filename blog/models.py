@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -33,6 +34,10 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User)
+    is_delete = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title if len(self.title) > 20 else self.title[:20]
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', kwargs={'pk': self.pk})
