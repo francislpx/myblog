@@ -16,9 +16,9 @@ def post_comment(request, post_pk):
             return redirect(post)
         else:
             comment_list = post.comments_set.all();
-            context = {'post':post,
-                       'form':form,
-                       'comment_list':comment_list
+            context = {'post': post,
+                       'form': form,
+                       'comment_list': comment_list
                        }
             return render(request, 'blog/detail.html', context=context)
     return redirect(post)

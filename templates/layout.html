@@ -24,7 +24,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <img src="{% static 'blog/img/headimage.jpg' %}" class="img-circle img-responsive"/>
+                <a href="{% url 'blog:index' %}">
+                    <img src="{% static 'blog/img/headimage.jpg' %}" class="img-circle img-responsive"/>
+                </a>
             </div>
             <div class="col-md-5 text-center">
                 <h1><strong>Simba Li </strong></h1>
@@ -62,13 +64,13 @@
                     </li>
                     {% archives as date_list %}
                     {% for date in date_list %}
-                    <li class="list-group-item">
-                        <span class="badge">104</span>
-                        <a href="{% url 'blog:archive' date.year date.month %}">
-                            {{ date.year }}年{{ date.month }}月
-                        </a>
-                    </li>
-                    {% empty %}
+                        <li class="list-group-item">
+                            <span class="badge"></span>
+                            <a href="{% url 'blog:archive' date.year date.month %}">
+                                {{ date.year }}年{{ date.month }}月
+                            </a>
+                        </li>
+                        {% empty %}
                         <li class="list-group-item">
                             <span class="badge">104</span>暂无归档
                         </li>
@@ -80,7 +82,7 @@
                     {% get_categories as categories %}
                     {% for category in categories %}
                         <li class="list-group-item">
-                            <span class="badge">104</span>
+                            <span class="badge">{{ category.post_set.count }}</span>
                             <a href="{% url 'blog:category' category.pk %}">
                                 {{ category.name }}
                             </a>
