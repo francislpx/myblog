@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block main %}
+
 <section>
     <div class="container">
         <div class="row">
@@ -12,11 +13,13 @@
                         </div>
 {#                      <img src="{% static 'blog/img/1.jpg' %}" class="img-responsive img-rounded"/>#}
                     </a>
+                    {% if post.excerpt %}
                     <a href="{{ post.get_absolute_url }}">
                         <div class="blog-txt">
                             {{ post.excerpt }}
                         </div>
                     </a>
+                    {% endif %}
                     <div class="blog-info">
                         <span class="label label-primary">{{ post.create_time }}</span>
 {#                        <span class="label label-success">In Technology</span>#}
@@ -29,7 +32,7 @@
 
                 </div>
                 {% empty %}
-                    <div>还没用发布的文章</div>
+                    <div>还没有发布的文章</div>
                 {% endfor %}
                 <!--BLOG THREE END -->
                 <nav>
@@ -47,54 +50,6 @@
                 </nav>
                 <!--PAGING  END -->
             </div>
-
-
-            <div class="col-md-3">
-
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Main Categories</strong>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">104</span>
-                        Technology
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">34</span>
-                        Blogging
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">10</span>
-                        Information
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">50</span>
-                        Security
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Other Categories</strong>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">104</span>
-                        Technology
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">34</span>
-                        Blogging
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">10</span>
-                        Information
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">50</span>
-                        Security
-                    </li>
-                </ul>
-                <br/>
-            </div>
-
-
         </div>
     </div>
 </section>
