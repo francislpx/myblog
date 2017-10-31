@@ -49,21 +49,21 @@ class Post(models.Model):
         self.views += 1
         self.save(update_fields=['views'])
 
-    # 重写save方法
-    def save(self, *args, **kwargs):
-        # 没有摘要的情况下
-        if not self.excerpt:
-            # 实例化一个Markdown类，渲染body
-            md = markdown.Markdown(extensions=[
-                'markdown.extensions.extra',
-                'markdown.extensions.codehilite',
-            ])
-            # 先将Markdown渲染成html
-            # strip_tags 去掉html里面的html标签，
-            # 然后截取54个字符赋值给excerpt
-            self.excerpt = strip_tags(md.convert(self.body))[:54]
-        # 调用父类的save方法存储数据
-        super().save(*args, **kwargs)
+    # 重写save方法，此方法并不算好
+    # def save(self, *args, **kwargs):
+    #     # 没有摘要的情况下
+    #     if not self.excerpt:
+    #         # 实例化一个Markdown类，渲染body
+    #         md = markdown.Markdown(extensions=[
+    #             'markdown.extensions.extra',
+    #             'markdown.extensions.codehilite',
+    #         ])
+    #         # 先将Markdown渲染成html
+    #         # strip_tags 去掉html里面的html标签，
+    #         # 然后截取54个字符赋值给excerpt
+    #         self.excerpt = strip_tags(md.convert(self.body))[:54]
+    #     # 调用父类的save方法存储数据
+    #     super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-create_time']

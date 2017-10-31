@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block main %}
+{% load blog_tags %}
 
 <section>
     <div class="container">
@@ -13,13 +14,11 @@
                         </div>
 {#                      <img src="{% static 'blog/img/1.jpg' %}" class="img-responsive img-rounded"/>#}
                     </a>
-                    {% if post.excerpt %}
                     <a href="{{ post.get_absolute_url }}">
                         <div class="blog-txt">
-                            {{ post.excerpt }}
+                            {{ post.excerpt | get_excerpt:post.body }}
                         </div>
                     </a>
-                    {% endif %}
                     <div class="blog-info">
                         <span class="label label-primary">{{ post.create_time }}</span>
                         <span class="label label-danger">阅读：{{ post.views }}</span>
