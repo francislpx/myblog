@@ -10,10 +10,10 @@
         {#        <img src="assets/img/1.jpg" class="img-responsive img-rounded"/>#}
         <div class="blog-info">
             <span class="label label-primary">{{ post.create_time }}</span>
-            <span class="label label-success">In Technology</span>
             <span class="label label-danger">{{ post.author }}</span>
+            <span class="label label-success">阅读：{{ post.views }}</span>
             <span class="label label-info">
-            <i class="fa fa-thumbs-up"></i>+ 10
+            <i class="fa fa-thumbs-up"></i>+     10
             <i class="fa fa-thumbs-down"></i>-3
         </span>
         </div>
@@ -63,11 +63,11 @@
             <li class="media">
                 <div class="media-body">
                     <h4 class="media-heading">
-                        {{ comment.name }}：
+                        <pre>{{ comment.name }}</pre>：
                         <time style="font-size: small; color: grey">{{ comment.create_time }}</time>
                     </h4>
                     <p>
-                        {{ comment.text }}
+                        <pre>{{ comment.text }}</pre>
                     </p>
                 </div>
             </li>

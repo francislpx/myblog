@@ -22,9 +22,9 @@
                     {% endif %}
                     <div class="blog-info">
                         <span class="label label-primary">{{ post.create_time }}</span>
+                        <span class="label label-danger">阅读：{{ post.views }}</span>
                         <span class="label label-success">评论：{{ post.comments_set.count }}</span>
-{#                        <span class="label label-danger">By Jhon</span>#}
-{#                        <span class="label label-info">#}
+                        {#                        <span class="label label-info">#}
 {#                            <i class="fa fa-thumbs-up"></i>+ 10#}
 {#                            <i class="fa fa-thumbs-down"></i>-3#}
 {#                        </span>#}
