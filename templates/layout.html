@@ -90,8 +90,22 @@
                     {% empty %}
                     {% endfor %}
 
+                    <li class="list-group-item">
+                        <strong>Tags</strong>
+                    </li>
+                    {% get_tags as tags %}
+                    {% for tag in tags %}
+                        <li class="list-group-item">
+                            <span class="badge">{{ tag.num_post }}</span>
+                            <a href="{% url 'blog:tag' tag.pk %}">
+                                {{ tag.name }}
+                            </a>
+                        </li>
+                    {% empty %}
+                    {% endfor %}
                 </ul>
                 <br/>
+                </ul>
             </div>
         </div>
     </div>

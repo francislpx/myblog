@@ -1,30 +1,32 @@
 from django.shortcuts import render, get_object_or_404
 from comments.forms import CommentForm
-from .models import Post, Category
+from .models import Post, Category, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import markdown
 
 
 def index(request):
     all_posts = Post.objects.all()
-    # 10篇文章分页
-    paginator = Paginator(all_posts, 1)
+    return posts_paginator(all_posts, request)
 
+
+def posts_paginator(all_posts, request):
+    """ 文章分页 """
+
+    # 10篇文章分页
+    paginator = Paginator(all_posts, 10)
     page = request.GET.get('page')
     try:
         page = int(page) if page else 1
     except TypeError:
         page = 1
-
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
         posts = paginator.page(1)
     except EmptyPage:  # 如果页码太大，没有相应的记录
         posts = paginator.page(paginator.num_pages)  # 取最后一页的记录
-
     page_data = get_page_data(paginator.num_pages, page)
-
     return render(request, 'blog/index.html', context={'posts': posts, 'page': page_data})
 
 
@@ -44,7 +46,7 @@ def get_page_data(total, current_page_number):
     left_ellipsis = True
     # 右侧省略号是否显示
     right_ellipsis = False
-    if total <= 6:
+    if total < 10:
         left_page_numbers = range(1, total + 1)
         left_ellipsis = False
         right_page_numbers = []
@@ -53,8 +55,10 @@ def get_page_data(total, current_page_number):
         if current_page_number < 6:
             if current_page_number > 2:
                 left_page_numbers = range(1, current_page_number + 2)
+                # if total - 2 > current_page_number:
                 left_ellipsis = False
                 right_ellipsis = True
+
         elif total - current_page_number > 4:
             right_ellipsis = True
             middle_page_numbers = [current_page_number - 1, current_page_number, current_page_number + 1]
@@ -91,14 +95,22 @@ def detail(request, pk):
 
 
 def archives(request, year, month):
+    """ 归档（按照年月） """
     posts = Post.objects.filter(create_time__year=year,
                                 create_time__month=month
                                 )
-
-    return render(request, 'blog/index.html', context={'posts': posts})
+    return posts_paginator(posts, request)
 
 
 def categories(request, pk):
+    """ 目录 """
     category = get_object_or_404(Category, pk=pk)
     posts = Post.objects.filter(category=category)
-    return render(request, 'blog/index.html', context={'posts': posts})
+    return posts_paginator(posts, request)
+
+
+def get_posts_by_tag(request, pk):
+    """ 标签 """
+    tag = get_object_or_404(Tag, pk=pk)
+    posts = Post.objects.filter(tags=tag)
+    return posts_paginator(posts, request)

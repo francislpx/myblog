@@ -1,7 +1,8 @@
 from django import template
-from ..models import Post, Category
+from ..models import Post, Category, Tag
 import markdown
 from django.utils.html import strip_tags
+from django.db.models.aggregates import Count
 
 register = template.Library()
 
@@ -43,3 +44,14 @@ def get_excerpt(excerpt, body):
         return auto_excerpt
     else:
         return excerpt
+
+
+@register.simple_tag()
+def get_category_count():
+    # Count 计算分类下的文章数，其接受的参数为需要计数的模型的名称
+    return Category.objects.annotate(num_post=Count('post')).filter(num_posts__gt=0)
+
+
+@register.simple_tag()
+def get_tags():
+    return Tag.objects.annotate(num_post=Count('post'))
