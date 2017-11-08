@@ -33,54 +33,54 @@
 
     </div>
     <!--BLOG MAIN SECTION END-->
-    <div>
-        <form action="{% url 'comment:post_comment' post.pk %}" method="post" class="comment-form">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="{{ form.name.id_for_label }}">名字：</label>
-                    {{ form.name }}
-                    {{ form.name.errors }}
-                </div>
-                <div class="col-md-4">
-                    <label for="{{ form.email.id_for_label }}">邮箱：</label>
-                    {{ form.email }}
-                    {{ form.email.errors }}
-                </div>
-                <div class="col-md-4">
-                    <label for="{{ form.url.id_for_label }}">URL：</label>
-                    {{ form.url }}
-                    {{ form.url.errors }}
-                </div>
-                <div class="col-md-12">
-                    <label for="{{ form.text.id_for_label }}">评论：</label>
-                    {{ form.text }}
-                    {{ form.text.errors }}
-                    <button type="submit" class="comment-btn">发表</button>
-                </div>
-            </div>
-        </form>
-    </div>
+{#    <div>#}
+{#        <form action="{% url 'comment:post_comment' post.pk %}" method="post" class="comment-form">#}
+{#            {% csrf_token %}#}
+{#            <div class="row">#}
+{#                <div class="col-md-4">#}
+{#                    <label for="{{ form.name.id_for_label }}">名字：</label>#}
+{#                    {{ form.name }}#}
+{#                    {{ form.name.errors }}#}
+{#                </div>#}
+{#                <div class="col-md-4">#}
+{#                    <label for="{{ form.email.id_for_label }}">邮箱：</label>#}
+{#                    {{ form.email }}#}
+{#                    {{ form.email.errors }}#}
+{#                </div>#}
+{#                <div class="col-md-4">#}
+{#                    <label for="{{ form.url.id_for_label }}">URL：</label>#}
+{#                    {{ form.url }}#}
+{#                    {{ form.url.errors }}#}
+{#                </div>#}
+{#                <div class="col-md-12">#}
+{#                    <label for="{{ form.text.id_for_label }}">评论：</label>#}
+{#                    {{ form.text }}#}
+{#                    {{ form.text.errors }}#}
+{#                    <button type="submit" class="comment-btn">发表</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
 
 
-    <h3 style="margin-top: 50px"><strong>Recent Comments :</strong></h3>
-    <hr/>
-    <ul class="media-list">
-        {% for comment in comments %}
-            <li class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <pre>{{ comment.name }}</pre>：
-                        <time style="font-size: small; color: grey">{{ comment.create_time }}</time>
-                    </h4>
-                    <p>
-                        <pre>{{ comment.text }}</pre>
-                    </p>
-                </div>
-            </li>
-        {% empty %}
-            暂无评论
-        {% endfor %}
+{#    <h3 style="margin-top: 50px"><strong>Recent Comments :</strong></h3>#}
+{#    <hr/>#}
+{#    <ul class="media-list">#}
+{#        {% for comment in comments %}#}
+{#            <li class="media">#}
+{#                <div class="media-body">#}
+{#                    <h4 class="media-heading">#}
+{#                        <pre>{{ comment.name }}</pre>：#}
+{#                        <time style="font-size: small; color: grey">{{ comment.create_time }}</time>#}
+{#                    </h4>#}
+{#                    <p>#}
+{#                        <pre>{{ comment.text }}</pre>#}
+{#                    </p>#}
+{#                </div>#}
+{#            </li>#}
+{#        {% empty %}#}
+{#            暂无评论#}
+{#        {% endfor %}#}
         <!-- COMMENT SECTION - ONE END-->
         {#        <li class="media">#}
         {#            <a class="pull-left" href="#">#}
@@ -146,7 +146,7 @@
         {#            </div>#}
         {#        </li>#}
         <!-- COMMENT SECTION - THREE END-->
-    </ul>
+{#    </ul>#}
     <!--COMMENTS SECTION END-->
 </div>
 {% endblock main %}
