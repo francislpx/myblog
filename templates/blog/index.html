@@ -14,11 +14,14 @@
                         </div>
 {#                      <img src="{% static 'blog/img/1.jpg' %}" class="img-responsive img-rounded"/>#}
                     </a>
-                    <a href="{{ post.get_absolute_url }}">
-                        <div class="blog-txt">
-                            {{ post.excerpt | get_excerpt:post.body }}
-                        </div>
-                    </a>
+                    {% if post.excerpt %}
+                        <a href="{{ post.get_absolute_url }}">
+                            <div class="blog-txt">
+    {#                            {{ post.excerpt | get_excerpt:post.body }}#}
+                                {{ post.excerpt}}
+                            </div>
+                        </a>
+                    {% endif %}
                     <div class="blog-info">
                         <span class="label label-primary">{{ post.create_time }}</span>
                         <span class="label label-danger">阅读：{{ post.views }}</span>
